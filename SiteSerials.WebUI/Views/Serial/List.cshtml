@@ -4,31 +4,17 @@
 
 @{
     ViewBag.Title = "Сериалы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Сериалы:</h2>
 
+@foreach (var p in @Model.Serials)
+{
+    @Html.Partial("SerialSummary", p)
+}
+
 <table class="table">
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Serials.  )
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Serial_title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SerialDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            
-        </th>
-        <th></th>
-    </tr>*@
-
-
 
 @foreach (var item in @Model.Serials) {
     <tr>
@@ -36,7 +22,6 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.Serial_title)*@
         <a href="/Serial/SeasonList/@item.Id">@Html.DisplayFor(modelItem => item.Serial_title)</a>
         </td>
         <td>
@@ -50,6 +35,9 @@
 
 </table>
 
-<div>
+<div class="btn-group pull-right">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
 </div>
+
+
+

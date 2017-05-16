@@ -1,0 +1,8 @@
+﻿@model SiteSerials.Domain.Entities.Serial
+<div class="well">
+    <h3>
+        <a href="/Serial/SeasonList/@Model.Id">@Html.DisplayFor(modelItem => Model.Serial_title)</a>
+        <span class="pull-right label label-primary">@Model.Rating.ToString("рейтинг: # ")</span>
+    </h3>
+    <span class="lead">@Model.SerialDescription</span>
+</div>
