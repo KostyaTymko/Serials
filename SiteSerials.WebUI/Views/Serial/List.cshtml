@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SiteSerials.Domain.Entities.Serial>
+
+@{
+    ViewBag.Title = "Сериалы:";
+}
+
+<h2>List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serial_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Serial_title)*@
+        <a href="/Serial/SeasonList/@item.Id">@Html.DisplayFor(modelItem => item.Serial_title)</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SerialDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Seasons.Count )*@
+            @*@foreach (var c in item.Seasons)
+            {
+               <div> @c.Season_title</div>
+            }*@
+        </td>
+
+    </tr>
+}
+
+</table>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SiteSerials.Domain.Entities.Serial>
+
+@{
+    ViewBag.Title = "SeasonList";
+}
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            <div><h3>@Html.DisplayFor(modelItem => item.Serial_title)</h3></div>
+
+            @foreach (var c in item.Seasons)
+            {
+                <h4>@c.Season_title</h4>
+                foreach (var b in c.Series)
+                {
+                    <div>@b.Title</div>
+                }
+            }
+        </td>
+
+    </tr>
+}
+
