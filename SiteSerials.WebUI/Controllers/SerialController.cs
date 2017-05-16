@@ -1,4 +1,5 @@
 ﻿using SiteSerials.Domain.Abstract;
+using SiteSerials.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,29 @@ namespace SiteSerials.WebUI.Controllers
     public class SerialController : Controller
     {
         private ISerialRepository repository;
+        public int pageSize = 4;
+
         public SerialController(ISerialRepository repo)
         {
             repository = repo;
         }
 
-        public ViewResult List()
+        public ViewResult List(int page = 1)
         {
-            return View(repository.Serials);
+            SerialsListViewModel model = new SerialsListViewModel
+            {
+                Serials = repository.Serials
+                    .OrderBy(serial => serial.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = repository.Serials.Count()
+                }
+            };
+            return View(model);
         }
 
         public ViewResult SeasonList(int id)

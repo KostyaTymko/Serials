@@ -1,15 +1,17 @@
-﻿@model IEnumerable<SiteSerials.Domain.Entities.Serial>
+﻿@using SiteSerials.WebUI.Models
+@using SiteSerials.WebUI.HtmlHelpers
+@model SerialsListViewModel
 
 @{
-    ViewBag.Title = "Сериалы:";
+    ViewBag.Title = "Сериалы";
 }
 
-<h2>List</h2>
+<h2>Сериалы:</h2>
 
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.Serials.  )
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Serial_title)
@@ -24,9 +26,11 @@
             
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
+
+
+@foreach (var item in @Model.Serials) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
@@ -41,15 +45,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Seasons.Count )*@
-            @*@foreach (var c in item.Seasons)
-            {
-               <div> @c.Season_title</div>
-            }*@
-        </td>
-
     </tr>
 }
 
 </table>
+
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>
