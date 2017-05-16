@@ -7,19 +7,22 @@ using System.Web.Mvc;
 
 namespace SiteSerials.WebUI.Controllers
 {
-    public class NavController : Controller
+    public class NavigationController : Controller
     {
+        // GET: Navigation
         private ISerialRepository repository;
 
-        public NavController(ISerialRepository repo)
+        public NavigationController(ISerialRepository repo)
         {
             repository = repo;
         }
+
         public PartialViewResult Menu(string category = null)
         {
             ViewBag.SelectedCategory = category;
+
             IEnumerable<string> categories = repository.Serials
-                .Select(game => game.Category)
+                .Select(serials => serials.Category)
                 .Distinct()
                 .OrderBy(x => x);
             return PartialView(categories);

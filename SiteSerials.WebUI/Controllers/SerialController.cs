@@ -18,11 +18,30 @@ namespace SiteSerials.WebUI.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int page = 1)
+        //public ViewResult List(int page = 1)
+        //{
+        //    SerialsListViewModel model = new SerialsListViewModel
+        //    {
+        //        Serials = repository.Serials
+        //            .OrderBy(serial => serial.Id)
+        //            .Skip((page - 1) * pageSize)
+        //            .Take(pageSize),
+        //        PagingInfo = new PagingInfo
+        //        {
+        //            CurrentPage = page,
+        //            ItemsPerPage = pageSize,
+        //            TotalItems = repository.Serials.Count()
+        //        }
+        //    };
+        //    return View(model);
+        //}
+
+        public ViewResult List(string category, int page = 1)
         {
             SerialsListViewModel model = new SerialsListViewModel
             {
                 Serials = repository.Serials
+                    .Where(p => category == null || p.Category == category)
                     .OrderBy(serial => serial.Id)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),
@@ -30,8 +49,11 @@ namespace SiteSerials.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = repository.Serials.Count()
-                }
+                    TotalItems = category == null ?
+                repository.Serials.Count() :
+                repository.Serials.Where(game => game.Category == category).Count()
+                },
+                CurrentCategory = category
             };
             return View(model);
         }
