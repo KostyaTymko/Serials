@@ -10,8 +10,7 @@ namespace SiteSerials.Domain.Concrete
 {
     public class UserSerialRepository:IUserRepository
     {
-       UserDbContext context = new UserDbContext();
-
+        EFDbContext context = new EFDbContext();
         public IEnumerable<User> Users
         {
             get { return context.Users; }

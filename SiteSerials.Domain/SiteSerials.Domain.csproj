@@ -81,18 +81,34 @@
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFSerialRepository.cs" />
-    <Compile Include="Concrete\UserDbContext.cs" />
     <Compile Include="Concrete\UserSerialRepository.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Season.cs" />
     <Compile Include="Entities\Serial.cs" />
     <Compile Include="Entities\Serie.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Migrations\201705151154325_InitialCreate.cs" />
+    <Compile Include="Migrations\201705151154325_InitialCreate.Designer.cs">
+      <DependentUpon>201705151154325_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705170548036_One.cs" />
+    <Compile Include="Migrations\201705170548036_One.Designer.cs">
+      <DependentUpon>201705170548036_One.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705151154325_InitialCreate.resx">
+      <DependentUpon>201705151154325_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705170548036_One.resx">
+      <DependentUpon>201705170548036_One.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
