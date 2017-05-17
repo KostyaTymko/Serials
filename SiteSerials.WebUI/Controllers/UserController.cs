@@ -1,9 +1,13 @@
 ﻿using SiteSerials.Domain.Abstract;
+using SiteSerials.Domain.Concrete;
+using SiteSerials.Domain.Entities;
+using SiteSerials.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace SiteSerials.WebUI.Controllers
 {
@@ -25,77 +29,77 @@ namespace SiteSerials.WebUI.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Login(LoginModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // поиск пользователя в бд
-        //        User user = null;
-        //        using (UserContext db = new UserContext())
-        //        {
-        //            user = db.Users.FirstOrDefault(u => u.Email == model.Name && u.Password == model.Password);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // поиск пользователя в бд
+                User user = null;
+                using (EFDbContext db = new EFDbContext())
+                {
+                    user = db.Users.FirstOrDefault(u => u.UserName == model.Name && u.Password == model.Password);
 
-        //        }
-        //        if (user != null)
-        //        {
-        //            FormsAuthentication.SetAuthCookie(model.Name, true);
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
-        //        }
-        //    }
+                }
+                if (user != null)
+                {
+                    FormsAuthentication.SetAuthCookie(model.Name, true);
+                    return RedirectToAction("List", "Serial");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
+                }
+            }
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //public ActionResult Register()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Register(RegisterModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        User user = null;
-        //        using (UserContext db = new UserContext())
-        //        {
-        //            user = db.Users.FirstOrDefault(u => u.Email == model.Name);
-        //        }
-        //        if (user == null)
-        //        {
-        //            // создаем нового пользователя
-        //            using (UserContext db = new UserContext())
-        //            {
-        //                db.Users.Add(new User { Email = model.Name, Password = model.Password, Age = model.Age });
-        //                db.SaveChanges();
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = null;
+                using (EFDbContext db = new EFDbContext())
+                {
+                    user = db.Users.FirstOrDefault(u => u.UserName == model.Name);
+                }
+                if (user == null)
+                {
+                    // создаем нового пользователя
+                    using (EFDbContext db = new EFDbContext())
+                    {
+                        db.Users.Add(new User { UserName = model.Name, Password = model.Password });
+                        db.SaveChanges();
 
-        //                user = db.Users.Where(u => u.Email == model.Name && u.Password == model.Password).FirstOrDefault();
-        //            }
-        //            // если пользователь удачно добавлен в бд
-        //            if (user != null)
-        //            {
-        //                FormsAuthentication.SetAuthCookie(model.Name, true);
-        //                return RedirectToAction("Index", "Home");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Пользователь с таким логином уже существует");
-        //        }
-        //    }
+                        user = db.Users.Where(u => u.UserName == model.Name && u.Password == model.Password).FirstOrDefault();
+                    }
+                    // если пользователь удачно добавлен в бд
+                    if (user != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(model.Name, true);
+                        return RedirectToAction("List", "Serial");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Пользователь с таким именем уже существует");
+                }
+            }
 
-        //    return View(model);
-        //}
-        //public ActionResult Logoff()
-        //{
-        //    FormsAuthentication.SignOut();
-        //    return RedirectToAction("Index", "Home");
-        //}
+            return View(model);
+        }
+        public ActionResult Logoff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("List", "Serial");
+        }
     }
 }

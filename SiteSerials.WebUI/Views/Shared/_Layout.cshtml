@@ -10,6 +10,13 @@
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">GameStore - магазин компьютерных игр</a>
+        @if (Request.IsAuthenticated)
+        {<a href="~/User/Logoff" class="mycolor">Выход</a> }
+        @if (!Request.IsAuthenticated)
+        {
+            <a href="~/User/Login" class="mycolor">Вход</a>
+            <a href="~/User/Register" class="mycolor">Регистрация</a>
+        }
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">

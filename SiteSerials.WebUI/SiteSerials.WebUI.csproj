@@ -200,6 +200,8 @@
     <Content Include="Views\Shared\SerialSummary.cshtml" />
     <Content Include="Views\Navigation\Menu.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
