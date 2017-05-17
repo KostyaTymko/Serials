@@ -9,6 +9,7 @@ namespace SiteSerials.WebUI.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
+        [Authorize(Users = "Admin")]
         public ActionResult Index()
         {
             return View();
