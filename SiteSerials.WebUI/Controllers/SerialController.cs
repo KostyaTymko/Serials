@@ -18,23 +18,6 @@ namespace SiteSerials.WebUI.Controllers
             repository = repo;
         }
 
-        //public ViewResult List(int page = 1)
-        //{
-        //    SerialsListViewModel model = new SerialsListViewModel
-        //    {
-        //        Serials = repository.Serials
-        //            .OrderBy(serial => serial.Id)
-        //            .Skip((page - 1) * pageSize)
-        //            .Take(pageSize),
-        //        PagingInfo = new PagingInfo
-        //        {
-        //            CurrentPage = page,
-        //            ItemsPerPage = pageSize,
-        //            TotalItems = repository.Serials.Count()
-        //        }
-        //    };
-        //    return View(model);
-        //}
 
         public ViewResult List(string category, int page = 1)
         {
@@ -55,6 +38,12 @@ namespace SiteSerials.WebUI.Controllers
                 },
                 CurrentCategory = category
             };
+            string result = "Вы не авторизованы";
+            if (User.Identity.IsAuthenticated)
+            {
+                result = "Ваш логин: " + User.Identity.Name;
+            }
+            ViewBag.Authenticated = result;
             return View(model);
         }
 
@@ -63,9 +52,9 @@ namespace SiteSerials.WebUI.Controllers
             return View(repository.Serials.Where(r=>r.Id==id));
         }
 
-        public ViewResult SerieList(int id)
-        {
-            return View();
-        }
+        //public ViewResult SerieList(int id)
+        //{
+        //    return View();
+        //}
     }
 }

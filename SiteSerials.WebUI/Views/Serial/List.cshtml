@@ -6,7 +6,7 @@
     ViewBag.Title = "Сериалы";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<h4>@ViewBag.Authenticated</h4>
 <h2>Сериалы:</h2>
 
 @foreach (var p in @Model.Serials)

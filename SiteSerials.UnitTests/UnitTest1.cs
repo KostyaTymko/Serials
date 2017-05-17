@@ -35,10 +35,26 @@ namespace SiteSerials.UnitTests
             SerialsListViewModel result = (SerialsListViewModel)controller.List(null,2).Model;
 
             // Утверждение
-            List<Serial> games = result.Serials.ToList();
-            Assert.IsTrue(games.Count == 2);
-            Assert.AreEqual(games[0].Serial_title, "Сериал4");
-            Assert.AreEqual(games[1].Serial_title, "Сериал5");
+            List<Serial> serials = result.Serials.ToList();
+            Assert.IsTrue(serials.Count == 2);
+            Assert.AreEqual(serials[0].Serial_title, "Сериал4");
+            Assert.AreEqual(serials[1].Serial_title, "Сериал5");
+        }
+
+        [TestMethod]
+        public void Can_Create_User()
+        {
+            // Организация (arrange)
+            Mock<IUserRepository> mock = new Mock<IUserRepository>();
+            mock.Setup(m => m.Users).Returns(new List<User>
+            {
+                new User { Id = 1, UserName = "Сериал1"},
+                new User { Id = 2, UserName = "Сериал2"},
+                new User { Id = 3, UserName = "Сериал3"},
+                new User { Id = 4, UserName = "Сериал4"},
+                new User { Id = 5, UserName = "Сериал5"}
+            });
+            UserController controller = new UserController(mock.Object);
         }
 
         [TestMethod]

@@ -16,7 +16,7 @@ namespace SiteSerials.WebUI.Controllers
         {
             repository = repo;
         }
-
+//        [Authorize]
         public PartialViewResult Menu(string category = null)
         {
             ViewBag.SelectedCategory = category;
