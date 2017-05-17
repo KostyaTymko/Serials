@@ -1,0 +1,13 @@
+﻿@using SiteSerials.Domain.Entities
+@model IEnumerable<User>
+
+@{
+    ViewBag.Title = "!!!!";
+}
+
+@foreach (var p in @Model)
+{
+    <div>
+        <h3>@p.UserName</h3>
+    </div>
+}

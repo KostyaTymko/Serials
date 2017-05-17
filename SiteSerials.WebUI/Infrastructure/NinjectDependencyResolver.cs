@@ -52,6 +52,7 @@ namespace SiteSerials.WebUI.Infrastructure
             //kernel.Bind<ISerialRepository>().ToConstant(mock.Object);
 
             kernel.Bind<ISerialRepository>().To<EFSerialRepository>();
+            kernel.Bind<IUserRepository>().To<UserSerialRepository>();
         }
     }
 }
