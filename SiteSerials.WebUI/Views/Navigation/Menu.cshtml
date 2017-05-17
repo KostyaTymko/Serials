@@ -3,6 +3,9 @@
 @Html.ActionLink("Домой", "List", "Serial", null,
     new { @class = "btn btn-block btn-default btn-lg" })
 
+@Html.ActionLink("Админ панель", "Index", "Admin", null,
+    new { @class = "btn btn-block btn-default btn-lg" })
+
 @foreach (var link in Model)
 {
     @Html.RouteLink(link, new
