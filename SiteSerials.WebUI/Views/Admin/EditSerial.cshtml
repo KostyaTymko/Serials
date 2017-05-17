@@ -1,0 +1,80 @@
+﻿@model SiteSerials.Domain.Entities.Serial
+
+@{
+    ViewBag.Title = "Админ панель: ";
+
+}
+
+@*<div class="panel">
+    <div class="panel-heading">
+        <h3>Редактирование игры «@Model.Serial_title»</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Seasons )
+            @Html.HiddenFor(m => m.Genres )
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "Id")
+                {
+                    <div class="form-group">
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Description")
+                        {
+                            @Html.TextArea(property.PropertyName, null,
+                                new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            @Html.TextBox(property.PropertyName, null,
+                                new { @class = "form-control" })
+                        }
+                    </div>
+                }
+            }
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+            @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", null, new
+       {
+           @class = "btn btn-default"
+       })
+        </div>
+    }
+</div>*@
+
+<div>
+    <h2>@Model.Serial_title</h2>
+
+    @using (Html.BeginForm("EditSerial", "Admin", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Serial_title, "Название")
+            @Html.EditorFor(m => m.Serial_title)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.SerialDescription, "Описание")
+            @Html.EditorFor(m => m.SerialDescription)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Category, "Категория")
+            @Html.EditorFor(m => m.Category)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Rating, "Рейтинг")
+            @Html.EditorFor(m => m.Rating)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Date, "Дата")
+            @Html.EditorFor(m => m.Date)
+        </p>
+
+        <input type="submit" />
+    }
+</div>
+
+

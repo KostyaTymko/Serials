@@ -1,7 +1,46 @@
-﻿
+﻿@model IEnumerable<SiteSerials.Domain.Entities.Serial >
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Админ панель: список товаров";
+//    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@*<a class="mycolor" style="color:red" href="~/Admin/EditSerial/2">Редактирование</a>*@
 
-<h2>РЕДАКТИРУЕМ</h2>
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Список сериалов:</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th class="text-right">ID</th>
+                <th>Название</th>
+                <th></th>
+                <th class="text-right">Рейтинг</th>
+                <th class="text-center"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-right">@item.Id</td>
+                    <td>@Html.ActionLink(item.Serial_title, "EditSeason", new { item.Id })</td>
+                    <td>@Html.ActionLink("Редактировать", "EditSerial", new { item.Id })</td>
+                    <td class="text-right">@item.Rating.ToString("#")</td>
+                    <td class="text-center">
+                        @using (Html.BeginForm("Delete", "Admin"))
+                        {
+                            @Html.Hidden("GameId", item.Id)
+                            <input type="submit"
+                                   class="btn btn-default btn-xs"
+                                   value="Удалить" />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Добавить сериал", "Create", null,
+            new { @class = "btn btn-default" })
+    </div>
+</div>

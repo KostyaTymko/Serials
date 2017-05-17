@@ -10,5 +10,6 @@ namespace SiteSerials.Domain.Abstract
     public interface ISerialRepository
     {
         IEnumerable<Serial> Serials { get; }
+        void SaveSerial(Serial serial);
     }
 }

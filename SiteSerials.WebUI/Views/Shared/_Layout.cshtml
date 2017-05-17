@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">GameStore - магазин компьютерных игр</a>
+        <a class="navbar-brand" href="#">Serials - сайт любимых сериалов</a>
         @if (Request.IsAuthenticated)
         {<a href="~/User/Logoff" class="mycolor">Выход</a> }
         @if (!Request.IsAuthenticated)
@@ -23,6 +23,10 @@
             @Html.Action("Menu", "Navigation")
         </div>
         <div class="col-xs-8">
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-success">@TempData["message"]</div>
+            }
             @RenderBody()
         </div>
     </div>
