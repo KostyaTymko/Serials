@@ -15,6 +15,24 @@ namespace SiteSerials.Domain.Concrete
         {
             get { return context.Users; }
         }
+
+        public void SaveUser(User user)
+        {
+            if (user.Id == 0)
+                context.Users.Add(user);
+            else
+            {
+                User dbEntry = context.Users.Find(user.Id);
+                if (dbEntry != null)
+                {
+                    dbEntry.UserName= user.UserName;
+                    dbEntry.Login = user.Login;
+                    dbEntry.Password = user.Password;
+                    dbEntry.UserSerials = user.UserSerials;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 
 }

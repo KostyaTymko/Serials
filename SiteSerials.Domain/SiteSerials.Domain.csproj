@@ -82,6 +82,7 @@
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFSerialRepository.cs" />
     <Compile Include="Concrete\UserSerialRepository.cs" />
+    <Compile Include="Entities\Favorite.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Season.cs" />
     <Compile Include="Entities\Serial.cs" />

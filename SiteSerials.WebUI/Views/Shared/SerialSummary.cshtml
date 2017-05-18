@@ -4,5 +4,14 @@
         <a href="/Serial/SeasonList/@Model.Id">@Html.DisplayFor(modelItem => Model.Serial_title)</a>
         <span class="pull-right label label-primary">@Model.Rating.ToString("рейтинг: # ")</span>
     </h3>
+    @*<a href="/Favorite/AddToFavorite/@Model.Id">!!!!</a>*@
+    @using (Html.BeginForm("AddToFavorite", "Favorite"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.Id)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="+" />
+        </div>
+    }
     <span class="lead">@Model.SerialDescription</span>
 </div>
