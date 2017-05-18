@@ -25,6 +25,11 @@ namespace SiteSerials.WebUI.Controllers
             return View(repository.Serials);
         }
 
+        public ViewResult Create()
+        {
+            return View("Editserial", new Serial());
+        }
+
         public ActionResult EditSerial(int id)
         {
             ViewBag.SerialId = id;
@@ -52,6 +57,18 @@ namespace SiteSerials.WebUI.Controllers
                 // Что-то не так со значениями данных
                 return View(serial);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Serial deletedSerial = repository.DeleteSerial(id);
+            if (deletedSerial != null)
+            {
+                TempData["message"] = string.Format("Игра \"{0}\" была удалена",
+                    deletedSerial.Serial_title);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

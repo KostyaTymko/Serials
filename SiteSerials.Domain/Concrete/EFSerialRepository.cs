@@ -33,5 +33,16 @@ namespace SiteSerials.Domain.Concrete
             }
             context.SaveChanges();
         }
+
+        public Serial DeleteSerial(int serialId)
+        {
+            Serial dbEntry = context.Serials.Find(serialId);
+            if (dbEntry != null)
+            {
+                context.Serials.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

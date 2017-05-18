@@ -11,5 +11,6 @@ namespace SiteSerials.Domain.Abstract
     {
         IEnumerable<Serial> Serials { get; }
         void SaveSerial(Serial serial);
+        Serial DeleteSerial(int serialId);
     }
 }

@@ -29,7 +29,7 @@
                     <td class="text-center">
                         @using (Html.BeginForm("Delete", "Admin"))
                         {
-                            @Html.Hidden("GameId", item.Id)
+                            @Html.Hidden("Id", item.Id)
                             <input type="submit"
                                    class="btn btn-default btn-xs"
                                    value="Удалить" />
