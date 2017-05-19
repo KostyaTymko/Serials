@@ -1,0 +1,13 @@
+﻿@using SiteSerials.WebUI.Models
+@using SiteSerials.WebUI.HtmlHelpers
+@model SerialsListViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Сериалы";
+}
+
+@foreach (var p in @Model.Serials)
+{
+    @Html.Partial("SearchSummary", p)
+}

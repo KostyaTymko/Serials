@@ -4,45 +4,15 @@
     ViewBag.Title = "Избранное";
 }
 <h2>Избранное</h2>
-@*<h2>@ViewBag.p</h2>*@
 
-@foreach (var line in Model.FavSerials)
+@if (Model.FavSerials != null)
 {
-        <td class="text-center">@line.Serial_title</td>
+    foreach (var line in Model.FavSerials)
+    {
+            @*<td class="text-center">@line.Serial_title</td>*@
+            <div class="well">
+                <span class="lead">@line.Serial_title</span>
+            </div>
+    }
 }
-@*<h2>Ваша корзина</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Кол-во</th>
-            <th>Игра</th>
-            <th class="text-right">Цена</th>
-            <th class="text-right">Общая цена</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var line in Model.Cart.Lines)
-        {
-            <tr>
-                <td class="text-center">@line.Quantity</td>
-                <td class="text-left">@line.Game.Name</td>
-                <td class="text-right">@line.Game.Price.ToString("# руб")</td>
-                <td class="text-right">
-                    @((line.Quantity * line.Game.Price).ToString("# руб"))
-                </td>
-            </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3" class="text-right">Итого:</td>
-            <td class="text-right">
-                @Model.Cart.ComputeTotalValue().ToString("# руб")
-            </td>
-        </tr>
-    </tfoot>
-</table>
 
-<div class="text-center">
-    <a class="btn btn-primary" href="@Model.ReturnUrl">Продолжить покупки</a>
-</div>*@

@@ -13,22 +13,35 @@ namespace SiteSerials.WebUI.Controllers
     public class FavoriteController : Controller
     {
         // GET: Favorite
-
-        public ActionResult Index(string returnUrl)
+        public PartialViewResult Summary()
         {
-            ViewBag.p = returnUrl;
+            Favorite f = new Favorite();
             using (EFDbContext db = new EFDbContext())
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    Favorite f = new Favorite();
+                    f.FavSerials = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).UserSerials;
+                    return PartialView(f);
+                }
+            }
+            f.FavSerials = null;
+            return PartialView(f);
+        }
+        public ActionResult Index(string returnUrl)
+        {
+            ViewBag.p = returnUrl;
+            Favorite f = new Favorite();
+            using (EFDbContext db = new EFDbContext())
+            {
+                if (User.Identity.IsAuthenticated)
+                {
                     f.FavSerials= db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).UserSerials;
                     returnUrl = "yes";
                     return View(f);
                 }
             }
-
-            return View();
+            f.FavSerials = null;
+            return View(f);
         }
 
         public RedirectToRouteResult AddToFavorite(int id, string returnUrl)
@@ -41,14 +54,11 @@ namespace SiteSerials.WebUI.Controllers
                     db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).UserSerials.Add(serial);
                     db.SaveChanges();
                     returnUrl = "yes";
-                    //returnUrl = User.Identity.Name;
-                    //returnUrl = serial.Serial_title;
                     return RedirectToAction("Index", new { returnUrl });
                 }
             }
             returnUrl = id.ToString();
             return RedirectToAction("Index", new { returnUrl });
-            //return RedirectToAction("Index");
         }
 
         //public RedirectToRouteResult RemoveFromCart(int gameId, string returnUrl)

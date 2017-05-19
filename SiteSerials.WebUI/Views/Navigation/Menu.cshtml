@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<string>
 
+<form class="btn btn-block btn-default btn-lg" style="margin-bottom:5px;background-color:lightsteelblue" name="search" method="GET" action="~/Serial/Search">
+    <input type="text" name="search" value="Поиск" maxlength="80" placeholder="">
+</form>
+
 @Html.ActionLink("Домой", "List", "Serial", null,
     new { @class = "btn btn-block btn-default btn-lg" })
 

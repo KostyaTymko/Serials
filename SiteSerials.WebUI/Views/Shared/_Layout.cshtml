@@ -9,14 +9,27 @@
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">Serials - сайт любимых сериалов</a>
+        <a class="navbar-brand" href="#">Serials - сайт любимых фильмов</a>
         @if (Request.IsAuthenticated)
-        {<a href="~/User/Logoff" class="mycolor">Выход</a> }
+        {
+            @*<a href="~/User/Logoff" class="mycolor">Выход</a>*@ 
+            <div class="navbar-text navbar-right">
+                    <b><a href="~/User/Logoff" class="mycolor">Выход</a></b>
+            </div>
+            @Html.Action("Summary", "Favorite")
+        }
         @if (!Request.IsAuthenticated)
         {
-            <a href="~/User/Login" class="mycolor">Вход</a>
-            <a href="~/User/Register" class="mycolor">Регистрация</a>
+            @*<a href="~/User/Login" class="mycolor">Вход</a>*@
+            @*<a href="~/User/Register" class="mycolor">Регистрация</a>*@
+            <div class="navbar-text navbar-right">
+                <b><a href="~/User/Register" class="mycolor">Регистрация</a></b>
+            </div>
+            <div class="navbar-text navbar-right">
+                <b><a href="~/User/Login" class="mycolor">Вход</a></b>
+            </div>
         }
+        @*@Html.Action("Summary", "Favorite")*@
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">

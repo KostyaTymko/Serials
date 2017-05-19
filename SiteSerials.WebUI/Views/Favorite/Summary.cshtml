@@ -1,0 +1,19 @@
+﻿@model SiteSerials.Domain.Entities.Favorite
+
+<div class="navbar-right">
+    @Html.ActionLink("Избранное", "Index", "Favorite",
+    new { returnUrl = Request.Url.PathAndQuery },
+    new { @class = "btn btn-default navbar-btn" })
+</div>
+
+<div class="navbar-text navbar-right">
+    <b>
+        В избранном:
+        @if (Model.FavSerials != null)
+        {
+            @Model.FavSerials.Count
+        }
+        else{ <b>пусто</b>}
+    </b>
+</div>
+

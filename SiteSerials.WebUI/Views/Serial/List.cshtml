@@ -14,7 +14,7 @@
     @Html.Partial("SerialSummary", p)
 }
 
-<table class="table">
+@*<table class="table">
 
 @foreach (var item in @Model.Serials) {
     <tr>
@@ -33,7 +33,7 @@
     </tr>
 }
 
-</table>
+</table>*@
 
 <div class="btn-group pull-right">
     @*@Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))

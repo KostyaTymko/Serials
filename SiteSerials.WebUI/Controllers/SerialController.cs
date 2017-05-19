@@ -41,7 +41,7 @@ namespace SiteSerials.WebUI.Controllers
             string result = "Вы не авторизованы";
             if (User.Identity.IsAuthenticated)
             {
-                result = "Ваш логин: " + User.Identity.Name;
+                result = "Здравствуйте, " + User.Identity.Name;
             }
             ViewBag.Authenticated = result;
             return View(model);
@@ -52,9 +52,18 @@ namespace SiteSerials.WebUI.Controllers
             return View(repository.Serials.Where(r=>r.Id==id));
         }
 
-        //public ViewResult SerieList(int id)
-        //{
-        //    return View();
-        //}
+        public ViewResult Search(string Search)
+        {
+            //Search= "SimCity2";
+            //        var seasons = db.Seasons.Where(s => s.Serial.Serial_title.Contains(Search));
+            SerialsListViewModel model = new SerialsListViewModel
+            {
+                Serials = repository.Serials.Where(p => p.Serial_title.Contains(Search)),
+                PagingInfo = null,
+                CurrentCategory = null
+            };
+
+            return View(model);
+        }
     }
 }
