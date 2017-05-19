@@ -1,4 +1,5 @@
 ﻿using SiteSerials.Domain.Abstract;
+using SiteSerials.Domain.Entities;
 using SiteSerials.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -54,8 +55,6 @@ namespace SiteSerials.WebUI.Controllers
 
         public ViewResult Search(string Search)
         {
-            //Search= "SimCity2";
-            //        var seasons = db.Seasons.Where(s => s.Serial.Serial_title.Contains(Search));
             SerialsListViewModel model = new SerialsListViewModel
             {
                 Serials = repository.Serials.Where(p => p.Serial_title.Contains(Search)),
@@ -64,6 +63,21 @@ namespace SiteSerials.WebUI.Controllers
             };
 
             return View(model);
+        }
+
+        public FileContentResult GetImage(int id)
+        {
+            Serial serial = repository.Serials
+                .FirstOrDefault(g => g.Id == id);
+
+            if (serial != null)
+            {
+                return File(serial.ImageData, serial.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

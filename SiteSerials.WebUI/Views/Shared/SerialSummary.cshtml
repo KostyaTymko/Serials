@@ -7,6 +7,14 @@
 
     @if (Request.IsAuthenticated)
     {
+        if (Model.ImageData != null)
+        {
+            <div class="pull-left" style="margin-right: 10px">
+                <img class="img-thumbnail" width="75" height="75"
+                     src="@Url.Action("GetImage", "Serial",
+                new { Model.Id })" />
+            </div>
+        }
         using (Html.BeginForm("AddToFavorite", "Favorite"))
         {
             <div class="pull-right">

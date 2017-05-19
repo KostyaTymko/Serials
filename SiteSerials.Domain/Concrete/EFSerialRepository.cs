@@ -29,6 +29,9 @@ namespace SiteSerials.Domain.Concrete
                     dbEntry.SerialDescription = serial.SerialDescription;
                     dbEntry.Rating = serial.Rating;
                     dbEntry.Category = serial.Category;
+                    dbEntry.Date = serial.Date;
+                    dbEntry.ImageData = serial.ImageData;
+                    dbEntry.ImageMimeType = serial.ImageMimeType;
                 }
             }
             context.SaveChanges();

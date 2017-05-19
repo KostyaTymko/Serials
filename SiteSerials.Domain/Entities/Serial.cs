@@ -32,6 +32,9 @@ namespace SiteSerials.Domain.Entities
         [Display(Name = "Рейтинг")]
         public int Rating { get; set; }
 
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
+
         public virtual ICollection<Season> Seasons { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
 

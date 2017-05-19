@@ -27,7 +27,7 @@ namespace SiteSerials.WebUI.Controllers
 
         public ViewResult Create()
         {
-            return View("Editserial", new Serial());
+            return View("EditSerial", new Serial());
         }
 
         public ActionResult EditSerial(int id)
@@ -40,14 +40,21 @@ namespace SiteSerials.WebUI.Controllers
 
         // Перегруженная версия Edit() для сохранения изменений
         [HttpPost]
-        public ActionResult EditSerial(Serial serial)
+        public ActionResult EditSerial(Serial serial, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(serial.Serial_title))
+                //if (string.IsNullOrEmpty(serial.Serial_title))
+                //{
+                //    ModelState.AddModelError("Name", "Некорректное название книги");
+                //}
+                if (image != null)
                 {
-                    ModelState.AddModelError("Name", "Некорректное название книги");
+                    serial.ImageMimeType = image.ContentType;
+                    serial.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(serial.ImageData, 0, image.ContentLength);
                 }
+                //return RedirectToAction("Index");
                 repository.SaveSerial(serial);
                 TempData["message"] = string.Format("Изменения в сериале \"{0}\" были сохранены", serial.Serial_title);
                 return RedirectToAction("Index");

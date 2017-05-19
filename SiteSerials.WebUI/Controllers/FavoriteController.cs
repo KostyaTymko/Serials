@@ -61,6 +61,7 @@ namespace SiteSerials.WebUI.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
+
         //public RedirectToRouteResult RemoveFromCart(int gameId, string returnUrl)
         //{
         //    Game game = repository.Games
