@@ -21,5 +21,10 @@ namespace SiteSerials.Domain.Entities
         public string Password { get; set; }
 
         public virtual ICollection<Serial> UserSerials { get; set; }
+
+        public User()
+        {
+            this.UserSerials = new HashSet<Serial>();
+        }
     }
 }

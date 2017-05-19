@@ -104,6 +104,10 @@
     <Compile Include="Migrations\201705190713567_Three.Designer.cs">
       <DependentUpon>201705190713567_Three.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705191223245_Four.cs" />
+    <Compile Include="Migrations\201705191223245_Four.Designer.cs">
+      <DependentUpon>201705191223245_Four.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705190713567_Three.resx">
       <DependentUpon>201705190713567_Three.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705191223245_Four.resx">
+      <DependentUpon>201705191223245_Four.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,11 +37,13 @@ namespace SiteSerials.Domain.Entities
 
         public virtual ICollection<Season> Seasons { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<User> Users { get; set; }
 
         public Serial()
         {
             this.Seasons = new HashSet<Season>();
             this.Genres = new HashSet<Genre>();
+            this.Users = new HashSet<User>();
         }
     }
 }
