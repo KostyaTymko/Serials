@@ -44,8 +44,9 @@ namespace SiteSerials.WebUI.Controllers
             return View(f);
         }
 
-        public RedirectToRouteResult AddToFavorite(int id, string returnUrl)
+        public RedirectToRouteResult AddToFavorite(int id)
         {
+            string returnUrl="no";
             using (EFDbContext db = new EFDbContext())
             {
                 if (User.Identity.IsAuthenticated)
@@ -61,29 +62,19 @@ namespace SiteSerials.WebUI.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
-
-        //public RedirectToRouteResult RemoveFromCart(int gameId, string returnUrl)
-        //{
-        //    Game game = repository.Games
-        //        .FirstOrDefault(g => g.GameId == gameId);
-
-        //    if (game != null)
-        //    {
-        //        GetCart().RemoveLine(game);
-        //    }
-        //    return RedirectToAction("Index", new { returnUrl });
-        //}
-
-        //public Cart GetCart()
-        //{
-        //    Cart cart = (Cart)Session["Cart"];
-        //    if (cart == null)
-        //    {
-        //        cart = new Cart();
-        //        Session["Cart"] = cart;
-        //    }
-        //    return cart;
-        //}
-
+        public RedirectToRouteResult RemoveFromFavorite(int id)
+        {
+            using (EFDbContext db = new EFDbContext())
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    Serial serial = db.Serials.FirstOrDefault(g => g.Id == id);
+                    db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).UserSerials.Remove(serial);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

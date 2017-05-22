@@ -9,10 +9,16 @@
 {
     foreach (var line in Model.FavSerials)
     {
-            @*<td class="text-center">@line.Serial_title</td>*@
-            <div class="well">
-                <span class="lead">@line.Serial_title</span>
-            </div>
+    <div>
+        <div class="well" style="display:inline-block;">
+            <span class="lead">@line.Serial_title</span>
+            @using (Html.BeginForm("RemoveFromFavorite", "Favorite", line.Id))
+            {
+                @Html.Hidden("Id", line.Id)
+                <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+            }
+        </div>
+    </div>
     }
 }
 
