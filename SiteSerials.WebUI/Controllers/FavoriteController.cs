@@ -12,11 +12,12 @@ namespace SiteSerials.WebUI.Controllers
 {
     public class FavoriteController : Controller
     {
+        EFDbContext db = new EFDbContext();
         // GET: Favorite
         public PartialViewResult Summary()
         {
             Favorite f = new Favorite();
-            using (EFDbContext db = new EFDbContext())
+            using (db)
             {
                 if (User.Identity.IsAuthenticated)
                 {
@@ -31,7 +32,7 @@ namespace SiteSerials.WebUI.Controllers
         {
             ViewBag.p = returnUrl;
             Favorite f = new Favorite();
-            using (EFDbContext db = new EFDbContext())
+            using (db)
             {
                 if (User.Identity.IsAuthenticated)
                 {
@@ -47,7 +48,7 @@ namespace SiteSerials.WebUI.Controllers
         public RedirectToRouteResult AddToFavorite(int id)
         {
             string returnUrl="no";
-            using (EFDbContext db = new EFDbContext())
+            using (db)
             {
                 if (User.Identity.IsAuthenticated)
                 {
@@ -64,7 +65,7 @@ namespace SiteSerials.WebUI.Controllers
 
         public RedirectToRouteResult RemoveFromFavorite(int id)
         {
-            using (EFDbContext db = new EFDbContext())
+            using (db)
             {
                 if (User.Identity.IsAuthenticated)
                 {

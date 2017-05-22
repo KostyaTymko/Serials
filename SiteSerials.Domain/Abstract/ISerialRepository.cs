@@ -11,6 +11,9 @@ namespace SiteSerials.Domain.Abstract
     {
         IEnumerable<Serial> Serials { get; }
         void SaveSerial(Serial serial);
+        void SaveSeason(Season season);
+        void CreateSeason(Season season);
         Serial DeleteSerial(int serialId);
+        Season DeleteSeason(int seasonId);
     }
 }

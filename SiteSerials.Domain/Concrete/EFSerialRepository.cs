@@ -37,12 +37,46 @@ namespace SiteSerials.Domain.Concrete
             context.SaveChanges();
         }
 
+        public void SaveSeason(Season season)
+        {
+            if (season.Id == 0)
+                context.Seasons.Add(season);
+            else
+            {
+                Season dbEntry = context.Seasons.Find(season.Id);
+                if (dbEntry != null)
+                {
+                    dbEntry.Season_title = season.Season_title;
+                    dbEntry.Serial = season.Serial;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public void CreateSeason(Season season)
+        {
+            context.Seasons.Add(season);
+            context.SaveChanges();
+        }
+
+
         public Serial DeleteSerial(int serialId)
         {
             Serial dbEntry = context.Serials.Find(serialId);
             if (dbEntry != null)
             {
                 context.Serials.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+        public Season DeleteSeason(int seasonId)
+        {
+            Season dbEntry = context.Seasons.Find(seasonId);
+            if (dbEntry != null)
+            {
+                context.Seasons.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

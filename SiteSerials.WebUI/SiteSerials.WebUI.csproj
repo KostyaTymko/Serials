@@ -210,6 +210,9 @@
     <Content Include="Views\Serial\Search.cshtml" />
     <Content Include="Views\Shared\SearchSummary.cshtml" />
     <Content Include="Views\Favorite\Summary.cshtml" />
+    <Content Include="Views\Admin\ViewSeason.cshtml" />
+    <Content Include="Views\Admin\EditSeason.cshtml" />
+    <Content Include="Views\Admin\CreateSeason.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

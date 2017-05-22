@@ -1,0 +1,28 @@
+﻿@model SiteSerials.Domain.Entities.Season
+@{
+    ViewBag.Title = "CreateSeason";
+}
+
+<h2>CreateSeason</h2>
+
+<div>
+    <h2>@Model.Season_title</h2>
+    <h2>@ViewBag.id</h2>
+
+    @using (Html.BeginForm("CreateSeason", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        if (Model.SerialId == 0)
+        {
+            Model.SerialId = ViewBag.id;
+        }
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Id, "ID")
+            @Html.EditorFor(m => m.SerialId)
+            @Html.LabelFor(m => m.Season_title, "Название")
+            @Html.EditorFor(m => m.Season_title)
+        </p>
+        <input type="submit" />
+    }
+</div>
+
