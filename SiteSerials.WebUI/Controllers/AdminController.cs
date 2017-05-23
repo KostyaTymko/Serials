@@ -26,6 +26,86 @@ namespace SiteSerials.WebUI.Controllers
             return View(repository.Serials);
         }
         //---------------------------------------------------------------------------------------
+        public ActionResult ViewSerie(int id)
+        {
+            int i = 0;
+            ViewBag.SerieId = id;
+            Season season = repository.Seasons.FirstOrDefault(g => g.Id == id);
+            i = season.Id;
+            ViewData["ID"] = i;
+            return View(season);
+        }
+
+        public ActionResult EditSerie(int id)
+        {
+            //Serie serie =  repository.Series.FirstOrDefault(q => q.Id == id);
+            return View(repository.Series.FirstOrDefault(q => q.Id == id));
+        }
+        [HttpPost]
+        public ActionResult EditSerie(Serie serie)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveSerie(serie);
+                TempData["message"] = string.Format("Изменения в сезоне \"{0}\" были сохранены", serie.Title);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Что-то не так со значениями данных
+                return View(serie);
+            }
+        }
+        //public ViewResult CreateSerie(int id)
+        //{
+        //    Serie serie = new Serie();
+        //    serie.SeasonId= id;
+        //    return View(serie);
+        //}
+
+        public ActionResult CreateSerie(int? id)
+        {
+            
+            if (id == null)
+                return HttpNotFound();
+            SelectList series = new SelectList(repository.Seasons.Where(d => d.Id == id), "Id", "Season_title");
+            ViewBag.Series = series;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateSerie(Serie serie)
+        {
+            EFDbContext db = new EFDbContext();
+            if (User.Identity.IsAuthenticated)
+            {
+                using (db)
+                {
+                    repository.CreateSerie(serie);
+                    db.SaveChanges();
+                }
+                TempData["message"] = string.Format("Изменения в сезоне \"{0}\" были сохранены", serie.Title);
+                return RedirectToAction("Index");
+            }
+            TempData["message"] = string.Format("Изменения НЕ были сохранены", serie.Title);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteSerie(int id)
+        {
+            EFDbContext db = new EFDbContext();
+            using (db)
+            {
+
+                Serie s = db.Series.FirstOrDefault(g => g.Id == id);
+                db.Series.Remove(s);
+                db.SaveChanges();
+                TempData["message"] = string.Format("Сезон \"{0}\" был удален",
+                    s.Title);
+                return RedirectToAction("Index");
+            }
+        }
+        //---------------------------------------------------------------------------------------
         //[HttpPost]
         public ActionResult DeleteSeason(int id)
         {
@@ -36,7 +116,6 @@ namespace SiteSerials.WebUI.Controllers
                 Season s = db.Seasons.FirstOrDefault(g => g.Id == id);
                 db.Seasons.Remove(s);
                 db.SaveChanges();
-                //TempData["message"] = string.Format("Сезон был удален");
                     TempData["message"] = string.Format("Сезон \"{0}\" был удален",
                         s.Season_title);
                 return RedirectToAction("Index");

@@ -1,0 +1,30 @@
+﻿@model SiteSerials.Domain.Entities.Serie
+
+@{
+    ViewBag.Title = "Редактирование серий: ";
+
+}
+
+<div>
+    <h2>@Model.Title</h2>
+
+    @using (Html.BeginForm("EditSerie", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Id, "ID")
+            @Html.EditorFor(m => m.Id)
+            @Html.LabelFor(m => m.Title, "Название")
+            @Html.EditorFor(m => m.Title )
+        </p>
+        <input type="submit" />
+    }
+</div>
+
+
+
+
+
+
+
+

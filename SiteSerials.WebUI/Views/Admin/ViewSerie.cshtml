@@ -1,0 +1,41 @@
+﻿@model SiteSerials.Domain.Entities.Season
+
+@{
+    ViewBag.Title = "Редактирование серий: ";
+
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Список серий:</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th class="text-right">ID</th>
+                <th>Название</th>
+                <th></th>
+                <th class="text-center"></th>
+            </tr>
+            @foreach (var item in Model.Series)
+            {
+                    <tr>
+                        <td class="text-right">@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@Html.ActionLink("Редактировать", "EditSerie", new { item.Id })</td>
+                        <td class="text-center">
+                            <a class="btn btn-default" href="/Admin/DeleteSerie/@item.Id">удалить серию</a>
+                        </td>
+                    </tr>
+
+            }
+
+        </table>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-default" href="/Admin/CreateSerie/@ViewData["ID"]">Добавить серию</a>
+    </div>
+</div>
+
+
+

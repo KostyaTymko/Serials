@@ -15,7 +15,14 @@ namespace SiteSerials.Domain.Concrete
         {
             get { return context.Serials; }
         }
-
+        public IEnumerable<Season> Seasons
+        {
+            get { return context.Seasons; }
+        }
+        public IEnumerable<Serie> Series
+        {
+            get { return context.Series; }
+        }
         public void SaveSerial(Serial serial)
         {
             if (serial.Id == 0)
@@ -52,13 +59,33 @@ namespace SiteSerials.Domain.Concrete
             }
             context.SaveChanges();
         }
+        public void SaveSerie(Serie serie)
+        {
+            if (serie.Id == 0)
+                context.Series.Add(serie);
+            else
+            {
+                Serie dbEntry = context.Series.Find(serie.Id);
+                if (dbEntry != null)
+                {
+                    dbEntry.Title = serie.Title;
+                    dbEntry.Season = serie.Season;
+                }
+            }
+            context.SaveChanges();
+            
+        }
 
         public void CreateSeason(Season season)
         {
             context.Seasons.Add(season);
             context.SaveChanges();
         }
-
+        public void CreateSerie(Serie serie)
+        {
+            context.Series.Add(serie);
+            context.SaveChanges();
+        }
 
         public Serial DeleteSerial(int serialId)
         {
@@ -81,5 +108,6 @@ namespace SiteSerials.Domain.Concrete
             }
             return dbEntry;
         }
+        public Serie DeleteSerie(int serieId) { return new Serie(); }
     }
 }

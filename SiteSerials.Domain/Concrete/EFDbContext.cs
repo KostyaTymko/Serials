@@ -12,7 +12,7 @@ namespace SiteSerials.Domain.Concrete
     {
         public DbSet<Serial> Serials { get; set; }
         public DbSet<Season> Seasons { get; set; }
-
+        public DbSet<Serie> Series { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

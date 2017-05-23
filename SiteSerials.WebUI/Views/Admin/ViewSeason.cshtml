@@ -23,7 +23,7 @@
                 {
                     <tr>
                         <td class="text-right">@item.Id</td>
-                        <td>@Html.ActionLink(item.Season_title, "EditSerie", new { item.Id })</td>
+                        <td>@Html.ActionLink(item.Season_title, "ViewSerie", new { item.Id })</td>
                         <td>@Html.ActionLink("Редактировать", "EditSeason", new { item.Id })</td>
                         <td class="text-center">
                             <a class="btn btn-default" href="/Admin/DeleteSeason/@item.Id">удалить сезон</a>

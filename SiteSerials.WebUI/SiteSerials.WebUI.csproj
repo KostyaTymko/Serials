@@ -213,6 +213,9 @@
     <Content Include="Views\Admin\ViewSeason.cshtml" />
     <Content Include="Views\Admin\EditSeason.cshtml" />
     <Content Include="Views\Admin\CreateSeason.cshtml" />
+    <Content Include="Views\Admin\ViewSerie.cshtml" />
+    <Content Include="Views\Admin\EditSerie.cshtml" />
+    <Content Include="Views\Admin\CreateSerie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

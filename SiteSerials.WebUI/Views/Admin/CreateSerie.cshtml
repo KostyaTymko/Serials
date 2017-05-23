@@ -1,0 +1,48 @@
+﻿@model SiteSerials.Domain.Entities.Serie
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Добавление новой серии</legend>
+
+        <p>
+            Название серии <br />
+            @Html.EditorFor(model => model.Title)
+        </p>
+
+        <p>
+            Сезон <br />
+            @Html.DropDownListFor(model => model.SeasonId, ViewBag.Series as SelectList)
+        </p>
+
+        <p>
+            <input type="submit" value="Добавить серию" />
+        </p>
+    </fieldset>
+}
+
+
+
+@*@model SiteSerials.Domain.Entities.Serie
+@{
+    ViewBag.Title = "CreateSerie";
+}
+
+<h2>CreateSerie</h2>
+
+<div>
+    <h2>:@ViewBag.id</h2>
+
+    @using (Html.BeginForm("CreateSerie", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.Id )
+        <p>
+            @Html.LabelFor(m => m.Id, "ID")
+            @Html.EditorFor(m => m.Id )
+            @Html.LabelFor(m => m.Title, "Название")
+            @Html.EditorFor(m => m.Title )
+        </p>
+        <input type="submit" />
+    }
+</div>*@
+
